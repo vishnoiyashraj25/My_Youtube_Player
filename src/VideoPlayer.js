@@ -25,7 +25,7 @@ const VideoPlayer = ({ videoId }) => {
   useEffect(() => {
     localStorage.setItem(`notes-${videoId}`, JSON.stringify(notes));
   }, [notes, videoId]);
-  
+
   const YOUR_API_KEY = process.env.REACT_APP_API_KEY;
 
   const fetchVideoData = async (videoId) => {
@@ -106,7 +106,7 @@ const VideoPlayer = ({ videoId }) => {
                 {showFullDescription ? (
                   videoData.description
                 ) : (
-                  `${videoData.description.split(' ').slice(0, 30).join(' ')}...`
+                  `${videoData.description.split(' ').slice(0, 20).join(' ')}...`
                 )}
                 <button
                   className="text-blue-500 hover:text-blue-700 ml-2"
@@ -119,7 +119,6 @@ const VideoPlayer = ({ videoId }) => {
               'Loading...'
             )}
           </div>
-        
         </div>
 
         {showInput ? (
@@ -154,7 +153,7 @@ const VideoPlayer = ({ videoId }) => {
             </p>
           </div>
           {notes.map((note, index) => (
-            <div key={index} className="bg-gray-600 p-4 rounded-lg mb-2 shadow-sm flex justify-between items-start">
+            <div key={index} className="bg-gray-600 p-4 rounded-lg mb-2 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center">
               <div
                 className="cursor-pointer hover:text-indigo-400"
                 onClick={() => handleSeekToTimestamp(note.timestamp)}
@@ -163,10 +162,10 @@ const VideoPlayer = ({ videoId }) => {
                 <p className="text-gray-200">Date: {note.date}</p>
                 <p className="text-gray-200 mt-2">Note: {note.note}</p>
               </div>
-              <div className="ml-4 flex-shrink-0">
+              <div className="flex flex-col sm:flex-row sm:ml-4 mt-2 sm:mt-0 flex-shrink-0">
                 <button
                   onClick={() => handleEditNote(index)}
-                  className="px-3 py-1 bg-back text-black rounded-lg mr-2 hover:bg-effect focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  className="px-3 py-1 mb-2 sm:mb-0 sm:mr-2 bg-back text-black rounded-lg hover:bg-effect focus:outline-none focus:ring-2 focus:ring-yellow-500"
                 >
                   Edit
                 </button>
